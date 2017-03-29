@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MobilePlayer</string>
+    <!--splash-->
+    <string name="inStartup">正在启动中...</string>
+</resources>

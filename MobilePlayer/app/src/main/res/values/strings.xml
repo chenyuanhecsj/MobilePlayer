@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">MobilePlayer</string>
+    <string name="app_name">手机影音</string>
     <!--splash-->
     <string name="inStartup">正在启动中...</string>
+    <!--MainActivity-->
+    <string name="localVideo">本地视频</string>
+    <string name="localMusic">本地音频</string>
+    <string name="netVideo">网络视频</string>
+    <string name="netMusic">网络音频</string>
+
 </resources>

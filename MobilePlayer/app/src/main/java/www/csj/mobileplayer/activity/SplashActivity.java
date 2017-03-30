@@ -1,58 +1,72 @@
 package www.csj.mobileplayer.activity;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.LinearLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import www.csj.mobileplayer.R;
 
 /**
  * Created by Administrator on 2017/3/29 0029.
  */
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity implements Animation.AnimationListener {
 
-    private Handler mHandler;
+    @BindView(R.id.rl_splash)
+    LinearLayout mRlSplash;
+
+    private AlphaAnimation mAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        ButterKnife.bind(this);
 
         initData();
+        initListener();
+    }
+
+    private void initListener() {
+        mAnimation.setAnimationListener(this);
     }
 
     /**
      * 初始化一些数据，延时三秒进入apk
      */
     private void initData() {
-        mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                goToMainActivity();
-            }
-        },3000);
+
+        mAnimation = new AlphaAnimation(0.1f, 1.0f);
+        mAnimation.setDuration(2000);
+        mAnimation.setFillAfter(true);
+        mRlSplash.setAnimation(mAnimation);
     }
 
     /**
      * 进入主页面
      */
     private void goToMainActivity() {
-       // Toast.makeText(this,"进入主页面",Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this,"进入主页面",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MainActivity.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-        } else {
-            startActivity(intent);
-        }
+        startActivity(intent);
         finish();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mHandler.removeCallbacksAndMessages(null);
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        goToMainActivity();
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
     }
 }

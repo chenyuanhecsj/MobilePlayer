@@ -9,4 +9,9 @@
         <item name="android:windowContentTransitions">true</item>
 
     </style>
+    <!--安卓6.0去掉标题栏的方法-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

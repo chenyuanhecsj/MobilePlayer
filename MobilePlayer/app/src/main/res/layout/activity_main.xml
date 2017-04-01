@@ -7,6 +7,11 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
+    <include
+        layout="@layout/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
     <FrameLayout
         android:id="@+id/fl_content"
         android:layout_width="match_parent"

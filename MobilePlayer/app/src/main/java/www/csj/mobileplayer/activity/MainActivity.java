@@ -11,11 +11,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import www.csj.mobileplayer.R;
 import www.csj.mobileplayer.fragment.AudioFragment;
+import www.csj.mobileplayer.fragment.FragmentFactory;
 import www.csj.mobileplayer.fragment.NetAudioFragment;
 import www.csj.mobileplayer.fragment.NetVideoFragment;
 import www.csj.mobileplayer.fragment.VideoFragment;
@@ -48,6 +50,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     TextView mTvNetAudio;
     @BindView(R.id.rl_tab_netaudio)
     LinearLayout mRlTabNetaudio;
+    @BindView(R.id.tv_top_search)
+    TextView mTvTopSearch;
+    @BindView(R.id.iv_top_game)
+    ImageView mIvTopGame;
+    @BindView(R.id.iv_top_record)
+    ImageView mIvTopRecord;
     private FragmentManager mFm;
     private VideoFragment mVideoFragment;
     private AudioFragment mAudioFragment;
@@ -72,6 +80,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mRlTabAudio.setOnClickListener(this);
         mRlTabNetvideo.setOnClickListener(this);
         mRlTabNetaudio.setOnClickListener(this);
+        mIvTopGame.setOnClickListener(this);
+        mTvTopSearch.setOnClickListener(this);
+        mIvTopRecord.setOnClickListener(this);
     }
 
     /**
@@ -102,29 +113,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 setSlectedTabBg(mTvVideo, mIvVideo, R.drawable.ic_tab_video_press);
                 unSlectedTabBg(mTvAudio, mIvAudio, mTvNetVideo, mIvNetVideo, mTvNetAudio, mIvNetAudio,
                         R.drawable.ic_tab_audio, R.drawable.ic_tab_netvideo, R.drawable.ic_tab_netaudio);
-                replaceFragment(mVideoFragment == null ? VideoFragment.newInstance() : mVideoFragment);
+                mVideoFragment = (VideoFragment) FragmentFactory.getInstanceByIndex(1);
+                //replaceFragment(mVideoFragment == null ? VideoFragment.newInstance() : mVideoFragment);
+                replaceFragment(mVideoFragment);
 
                 break;
             case R.id.rl_tab_audio:
                 setSlectedTabBg(mTvAudio, mIvAudio, R.drawable.ic_tab_audio_press);
                 unSlectedTabBg(mTvVideo, mIvVideo, mTvNetVideo, mIvNetVideo, mTvNetAudio, mIvNetAudio,
                         R.drawable.ic_tab_video, R.drawable.ic_tab_netvideo, R.drawable.ic_tab_netaudio);
-                replaceFragment(mAudioFragment == null ? AudioFragment.newInstance() : mAudioFragment);
+                mAudioFragment = (AudioFragment) FragmentFactory.getInstanceByIndex(2);
+                // replaceFragment(mAudioFragment == null ? AudioFragment.newInstance() : mAudioFragment);
+                replaceFragment(mAudioFragment);
 
                 break;
             case R.id.rl_tab_netvideo:
                 setSlectedTabBg(mTvNetVideo, mIvNetVideo, R.drawable.ic_tab_netvideo_press);
                 unSlectedTabBg(mTvAudio, mIvAudio, mTvVideo, mIvVideo, mTvNetAudio, mIvNetAudio,
                         R.drawable.ic_tab_audio, R.drawable.ic_tab_video, R.drawable.ic_tab_netaudio);
-                replaceFragment(mNetVideoFragment == null ? NetVideoFragment.newInstance() : mNetVideoFragment);
+                mNetVideoFragment = (NetVideoFragment) FragmentFactory.getInstanceByIndex(3);
+                // replaceFragment(mNetVideoFragment == null ? NetVideoFragment.newInstance() : mNetVideoFragment);
+                replaceFragment(mNetVideoFragment);
 
                 break;
             case R.id.rl_tab_netaudio:
                 setSlectedTabBg(mTvNetAudio, mIvNetAudio, R.drawable.ic_tab_netaudio_press);
                 unSlectedTabBg(mTvVideo, mIvVideo, mTvAudio, mIvAudio, mTvNetVideo, mIvNetVideo,
                         R.drawable.ic_tab_video, R.drawable.ic_tab_audio, R.drawable.ic_tab_netvideo);
-                replaceFragment(mNetAudioFragment == null ? NetAudioFragment.newInstance() : mNetAudioFragment);
+                mNetAudioFragment = (NetAudioFragment) FragmentFactory.getInstanceByIndex(4);
+                // replaceFragment(mNetAudioFragment == null ? NetAudioFragment.newInstance() : mNetAudioFragment);
+                replaceFragment(mNetAudioFragment);
                 break;
+            case R.id.tv_top_search:
+                Toast.makeText(this,"搜索",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_top_game:
+                break;
+            case R.id.iv_top_record:
+                break;
+
         }
     }
 
